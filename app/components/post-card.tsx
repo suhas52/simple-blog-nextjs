@@ -4,10 +4,10 @@ import { Card, CardActionArea, CardActions, CardContent, Typography } from "@mui
 import PostModal from "./modal"
 import { useState } from "react"
 
-interface PostType {
+ interface PostType {
         id: string,
         title: string,
-        created_at: string,
+        createdAt: string,
         content: string,
         author: string
     }
@@ -36,7 +36,7 @@ export default function PostCard({posts}: PostListProp) {
                         <Typography>{post.author}</Typography>
                     </CardActionArea>
                     <CardActionArea>
-                        <Typography>{post.created_at}</Typography>
+                        <Typography>{post.createdAt}</Typography>
                     </CardActionArea>
                 </CardActions>
                 <PostModal post={post} dialogIsOpen={dialogIsOpen} setDialogIsOpen={setDialogIsOpen} />

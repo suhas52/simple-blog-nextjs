@@ -9,7 +9,7 @@ import Comments from "./comments";
 interface PostType {
     id: string,
     title: string,
-    created_at: string,
+    createdAt: string,
     content: string,
     author: string
 }
@@ -51,7 +51,7 @@ export default function PostModal({post, dialogIsOpen, setDialogIsOpen}: PostMod
                         <Typography>{post.author}</Typography>
                     </CardActionArea>
                     <CardActionArea>
-                        <Typography>{post.created_at}</Typography>
+                        <Typography>{post.createdAt}</Typography>
                     </CardActionArea>
                 </CardActions>
             </Card>

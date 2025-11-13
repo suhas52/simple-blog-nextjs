@@ -2,8 +2,12 @@
 
 import { Container, TextField, Button } from "@mui/material";
 import { ChangeEvent, FormEvent, useState } from "react"
+import { addPost } from "../actions";
+import { useRouter } from "next/navigation";
+
 
 export default function Addpost() {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         title: "",
         content: ""
@@ -13,9 +17,20 @@ export default function Addpost() {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log(formData)
+        const {title, content} = formData;
+        const userId = "c66332e7-c012-479d-8375-114d74581405" //temp hardcode
+        try {
+            await addPost(userId, content, title);
+            
+            router.push("/blog")
+            
+        } catch (err) {
+            console.log(err)
+            alert("Could not add your post.")
+        }
+        
     }
 
     return <form onSubmit={handleSubmit} className="flex justify-center flex-1">
