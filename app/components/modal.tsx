@@ -3,6 +3,7 @@
 import { Backdrop, Card, CardActionArea, CardActions, CardContent, Dialog, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { Dispatch, SetStateAction } from "react";
+import Comments from "./comments";
 
 
 interface PostType {
@@ -54,5 +55,6 @@ export default function PostModal({post, dialogIsOpen, setDialogIsOpen}: PostMod
                     </CardActionArea>
                 </CardActions>
             </Card>
+        <Comments id={post.id}/>
     </Dialog>
 }

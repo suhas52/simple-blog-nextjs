@@ -1,9 +1,11 @@
 import { Card, CardActionArea, CardActions, CardContent, CardHeader, Container, Link, Typography } from "@mui/material";
 import { randomUUID } from "crypto";
 import PostModal from "../components/modal";
-import PostCard from "../components/card";
+import PostCard from "../components/post-card";
+import { PrismaClient } from "../generated/prisma/client";
 
-export default function BlogPage() {
+
+export default async function BlogPage() {
 
 
     interface PostType {
@@ -13,6 +15,9 @@ export default function BlogPage() {
         content: string,
         author: string
     }
+
+    const prisma = new PrismaClient();
+    // const newPosts = prisma.user
 
     const posts: PostType[] = [{
         id: randomUUID(),
