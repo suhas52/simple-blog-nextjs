@@ -15,12 +15,12 @@ interface PostType {
 }
 
 interface PostModalTypes {
-    post: PostType,
+    currentPost: PostType,
     dialogIsOpen: boolean,
     setDialogIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export default function PostModal({post, dialogIsOpen, setDialogIsOpen}: PostModalTypes) {
+export default function PostModal({currentPost, dialogIsOpen, setDialogIsOpen}: PostModalTypes) {
 
     
     return <Dialog open={dialogIsOpen} slotProps={{
@@ -29,7 +29,7 @@ export default function PostModal({post, dialogIsOpen, setDialogIsOpen}: PostMod
         sx: { backgroundColor: 'rgba(0, 0, 0, 0.4)' },
       },
     }} onClose={setDialogIsOpen} maxWidth="xl" className="flex border rounded-2xl">
-        <Card key={post.id} className="flex flex-1 flex-col p-2" >
+        <Card key={currentPost.id} className="flex flex-1 flex-col p-2" >
                <IconButton
                 aria-label="close"
                 onClick={() => setDialogIsOpen(false)}
@@ -43,18 +43,18 @@ export default function PostModal({post, dialogIsOpen, setDialogIsOpen}: PostMod
           <CloseIcon />
         </IconButton>
                 <CardContent>
-                    <Typography variant="h4">{post.title}</Typography>
-                    <Typography variant="body1">{post.content}</Typography>
+                    <Typography variant="h4">{currentPost.title}</Typography>
+                    <Typography variant="body1">{currentPost.content}</Typography>
                 </CardContent>
                 <CardActions className="flex">
                     <CardActionArea>
-                        <Typography>{post.author}</Typography>
+                        <Typography>{currentPost.author}</Typography>
                     </CardActionArea>
                     <CardActionArea>
-                        <Typography>{post.createdAt}</Typography>
+                        <Typography>{currentPost.createdAt}</Typography>
                     </CardActionArea>
                 </CardActions>
             </Card>
-        <Comments id={post.id}/>
+        <Comments id={currentPost.id}/>
     </Dialog>
 }

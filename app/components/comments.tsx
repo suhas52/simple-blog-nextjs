@@ -2,7 +2,8 @@
 
 import { Card, CardContent, CardHeader, Container, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
-import { getComments } from "../actions"
+import axios from "axios"
+
 
 
 
@@ -21,23 +22,36 @@ interface commentsType {
 
 export default function Comments({id}: idPropType) {
     
-    const [comments, setComments] = useState(null);
+    const [comments, setComments] = useState<commentsType[]>([]);
 
+    const [isLoading, setIsLoading] = useState(true)
+    
     useEffect(() => {
         
-    }, [])
-
-    // return <Container className="m-5 grid grid-cols-2 g-5">
-    //     {comments.map(comment => {
-    //         return <Card key={comment.id}>
-    //     <CardContent>
-    //         <Typography>{comment.username}</Typography>
-    //         <Typography>{comment.content}</Typography>
-    //         <Typography variant="subtitle2">{comment.created_at}</Typography>
-    //         <Typography></Typography>
-    //     </CardContent>
-    // </Card>
-    //     })}
-    // </Container>
-    return <h1>test</h1>
+        async function getComments() {
+            try {
+                const response = await axios.get(`http://localhost:3000/api/data/comments/${id}`)
+                setComments(response.data)
+                setIsLoading(false)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getComments();
+        
+    }, [id])
+    
+    return <Container className="m-5 grid grid-cols-2 g-5">
+        {Array.isArray(comments) && comments.map(comment => {
+            return <Card key={comment.id}>
+        <CardContent>
+            <Typography>{comment.username}</Typography>
+            <Typography>{comment.content}</Typography>
+            <Typography variant="subtitle2">{comment.createdAt}</Typography>
+            <Typography></Typography>
+        </CardContent>
+    </Card>
+        })}
+    </Container>
+    
 }
