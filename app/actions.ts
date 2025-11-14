@@ -43,3 +43,14 @@ export async function addPost(userId: string, content: string, title: string): P
         return newPost;
     }
 }
+
+export async function addComment(userId: string, postId: string, content: string, title: string): Promise<void> {
+    const newComment = await prisma.comment.create({
+        data: {
+            userId: userId,
+            content: content,
+            title: title,
+            postId: postId,
+        }
+    })
+}

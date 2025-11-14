@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardActionArea, CardActions, CardContent, Container, Typography } from "@mui/material"
-import PostModal from "./modal"
+import PostModal from "./post-modal"
 import { useState } from "react"
 
  interface PostType {

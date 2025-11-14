@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, Container, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import axios from "axios"
-
+import AddComment from "./comments-form"
 
 
 
@@ -41,7 +41,10 @@ export default function Comments({id}: idPropType) {
         
     }, [id])
     
-    return <Container className="m-5 grid grid-cols-2 g-5">
+    return <Container>
+        <AddComment postId={id}/>
+        <Container className="m-5 grid grid-cols-2 g-5">
+        
         {Array.isArray(comments) && comments.map(comment => {
             return <Card key={comment.id}>
         <CardContent>
@@ -53,5 +56,7 @@ export default function Comments({id}: idPropType) {
     </Card>
         })}
     </Container>
+    </Container>
+    
     
 }

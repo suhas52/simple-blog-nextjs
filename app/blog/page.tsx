@@ -1,6 +1,4 @@
-import { Card, CardActionArea, CardActions, CardContent, CardHeader, Container, Link, Typography } from "@mui/material";
-import { randomUUID } from "crypto";
-import PostModal from "../components/modal";
+import { Container } from "@mui/material";
 import PostCard from "../components/post-card";
 import { PrismaClient } from "../generated/prisma/client";
 

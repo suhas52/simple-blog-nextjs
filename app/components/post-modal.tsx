@@ -1,6 +1,6 @@
 
 
-import { Backdrop, Card, CardActionArea, CardActions, CardContent, Dialog, IconButton, Typography } from "@mui/material";
+import { Card, CardActionArea, CardActions, CardContent, Dialog, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { Dispatch, SetStateAction } from "react";
 import Comments from "./comments";
@@ -28,8 +28,8 @@ export default function PostModal({currentPost, dialogIsOpen, setDialogIsOpen}: 
         open: true,
         sx: { backgroundColor: 'rgba(0, 0, 0, 0.4)' },
       },
-    }} onClose={setDialogIsOpen} maxWidth="xl" className="flex border rounded-2xl">
-        <Card key={currentPost.id} className="flex flex-1 flex-col p-2" >
+    }} onClose={setDialogIsOpen} maxWidth="xl" className="flex border rounded-2xl justify-center">
+        <Card key={currentPost.id} className="flex flex-1 flex-col p-50" >
                <IconButton
                 aria-label="close"
                 onClick={() => setDialogIsOpen(false)}
