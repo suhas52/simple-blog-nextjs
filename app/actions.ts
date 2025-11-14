@@ -7,7 +7,7 @@ dotenv.config();
 const prisma = new PrismaClient();
 const SALT  = Number(process.env.JWT_SALT);
 
-export async function registerPost(firstName: string, lastName: string, username: string, password: string) {
+export async function registerUser(firstName: string, lastName: string, username: string, password: string) {
     const userExists = !!(await prisma.user.findUnique({
         where: { username },
     }));

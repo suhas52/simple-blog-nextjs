@@ -5,7 +5,7 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { addComment } from "../actions";
 
 
-export default function AddComment({postId}: {postId: string}) {
+export default function AddComment({postId, loggedUserId}: {postId: string, loggedUserId: string}) {
 
     const [formData, setFormData] = useState({
         title: "",
@@ -19,9 +19,8 @@ export default function AddComment({postId}: {postId: string}) {
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const {title, content} = formData;
-        const userId = "c66332e7-c012-479d-8375-114d74581405" //temp hardcode
         try {
-            await addComment(userId, postId, content, title);
+            await addComment(loggedUserId, postId, content, title);
 
         } catch (err) {
             console.log(err)

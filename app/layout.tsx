@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import NavBar01 from "./components/navbar";
 import { getUser } from "./middleware/jwt";
+import { getCookies } from "./helper";
 
 
 const geistSans = Geist({
@@ -26,9 +27,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const loggedUser = await getUser("971cc003-3972-4795-8b7b-56a3255a68ba")
-
+  
+  const token = await getCookies()
+  let loggedUser = null;
+  if (token) {
+    loggedUser = await getUser(token)
+  }
+  
+  
   return (
     <html lang="en">
       <body

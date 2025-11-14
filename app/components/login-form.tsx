@@ -1,11 +1,13 @@
 "use client"
 
 import { Button, Container, TextField } from "@mui/material";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export default function LoginForm() {
 
-
+    const router = useRouter();
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -17,7 +19,18 @@ export default function LoginForm() {
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log(formData)
+        const {username, password} = formData;
+        async function loginUser() {
+            try {
+            const response = await axios.post("http://localhost:3000/api/auth/login", {username, password})
+            if (response.data.message === "Login successful") router.push("/");
+            } catch (err) {
+                alert("Login failed")
+            }
+        }
+        
+        loginUser();
+        
     }
 
     return <form onSubmit={handleSubmit} className="flex justify-center flex-1">

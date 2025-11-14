@@ -4,11 +4,13 @@ import { Card, CardContent, CardHeader, Container, Typography } from "@mui/mater
 import { useEffect, useState } from "react"
 import axios from "axios"
 import AddComment from "./comments-form"
+import { OpaqueFallbackRouteParamEntries } from "next/dist/server/request/fallback-params"
 
 
 
 interface idPropType {
-    id: string
+    id: string,
+    loggedUserId: string
 }
 
 interface commentsType {
@@ -20,7 +22,7 @@ interface commentsType {
     username: string
 }
 
-export default function Comments({id}: idPropType) {
+export default function Comments({id, loggedUserId}: idPropType) {
     
     const [comments, setComments] = useState<commentsType[]>([]);
 
@@ -42,7 +44,7 @@ export default function Comments({id}: idPropType) {
     }, [id])
     
     return <Container>
-        <AddComment postId={id}/>
+        <AddComment postId={id} loggedUserId={loggedUserId}/>
         <Container className="m-5 grid grid-cols-2 g-5">
         
         {Array.isArray(comments) && comments.map(comment => {

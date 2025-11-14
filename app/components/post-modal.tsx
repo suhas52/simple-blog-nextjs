@@ -4,6 +4,8 @@ import { Card, CardActionArea, CardActions, CardContent, Dialog, IconButton, Typ
 import CloseIcon from '@mui/icons-material/Close';
 import { Dispatch, SetStateAction } from "react";
 import Comments from "./comments";
+import { getCookies } from "../helper";
+import { getUser } from "../middleware/jwt";
 
 
 interface PostType {
@@ -18,6 +20,12 @@ interface PostModalTypes {
     currentPost: PostType,
     dialogIsOpen: boolean,
     setDialogIsOpen: Dispatch<SetStateAction<boolean>>
+}
+
+const token = await getCookies()
+let loggedUser: any = null;
+if (token) {
+    loggedUser = await getUser(token)
 }
 
 export default function PostModal({currentPost, dialogIsOpen, setDialogIsOpen}: PostModalTypes) {
@@ -55,6 +63,6 @@ export default function PostModal({currentPost, dialogIsOpen, setDialogIsOpen}: 
                     </CardActionArea>
                 </CardActions>
             </Card>
-        <Comments id={currentPost.id}/>
+        <Comments id={currentPost.id} loggedUserId={loggedUser.id}/>
     </Dialog>
 }

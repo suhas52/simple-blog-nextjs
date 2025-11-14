@@ -2,7 +2,7 @@
 
 import { Button, Container, TextField } from "@mui/material";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { registerPost } from "../actions";
+import { registerUser } from "../actions";
 import { useRouter } from 'next/navigation';
 
 export default function RegisterForm() {
@@ -22,7 +22,7 @@ export default function RegisterForm() {
             e.preventDefault();
             const {firstName, lastName, username, password} = formData; 
             try {
-                const newUser = await registerPost(firstName, lastName, username, password);
+                const newUser = await registerUser(firstName, lastName, username, password);
                 if (newUser) {
                     router.push('/')
                 }

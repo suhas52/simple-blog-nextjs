@@ -1,11 +1,11 @@
 import { PrismaClient } from '@/app/generated/prisma/client';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 
 
 const prisma = new PrismaClient
 
 
-export async function GET(req: NextApiRequest, { params }: { params: {id: string}}, res: NextApiResponse) {
+export async function GET(req: NextRequest, { params }: { params: {id: string}}) {
     const id = (await params).id
     const result = await prisma.comment.findMany({
         where: {
