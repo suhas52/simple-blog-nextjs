@@ -18,7 +18,19 @@ import AdbIcon from '@mui/icons-material/Adb';
 const pages = ['About','Blog'];
 const settings = ['Profile', 'Account', 'Logout'];
 
-function NavBar01() {
+type loggedUserType = {
+  id: string,
+  isAdmin: boolean,
+  username: string,
+  firstName: string,
+  lastName: string
+} | null;
+
+interface loggedUserProp {
+  loggedUser: loggedUserType
+}
+
+function NavBar01({loggedUser}: loggedUserProp) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -125,7 +137,7 @@ function NavBar01() {
               </Button>
             ))}
           </Box>
-          {/* <Box sx={{ flexGrow: 0 }}>
+          {loggedUser && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -153,11 +165,11 @@ function NavBar01() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box> */}
-          <div className='flex gap-4'>
+          </Box>}
+          {!loggedUser && <div className='flex gap-4'>
             <Button variant='contained' href='/login'>Login</Button>
             <Button variant='contained' href='/register'>Register</Button>
-          </div>
+          </div>}
         </Toolbar>
       </Container>
     </AppBar>
