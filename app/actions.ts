@@ -43,4 +43,3 @@ export async function addPost(userId: string, content: string, title: string): P
         return newPost;
     }
 }
-
